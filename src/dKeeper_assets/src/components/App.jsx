@@ -4,6 +4,7 @@ import Footer from "./Footer";
 import { useState } from "react";
 import CreateArea from "./CreateArea";
 import Note from "./Note.jsx"
+import { dKeeper } from "../../../declarations/dKeeper";
 
 
 function App() {
@@ -12,6 +13,9 @@ function App() {
 
     function addNote(newNote) {
         setNote((prevItems) => {
+            // Call create note function from main.mo
+            // Pulling title and content that is created in CreateArea.jsx SetNote
+            dKeeper.createNote(newNote.title, newNote.content)
             return [...prevItems, newNote]
         });
     }
