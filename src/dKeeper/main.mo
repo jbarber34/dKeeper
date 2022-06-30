@@ -27,5 +27,9 @@ actor DKeeper {
 
   };
 
+  // Create function for reading notes back to the front end - read in the list as an array
+  public query func readNotes(): async [Note]{
+    return List.toArray(notes);
+  };
 
 }

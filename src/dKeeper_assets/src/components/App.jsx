@@ -1,4 +1,4 @@
-import React from "react";
+import React, { useEffect } from "react";
 import Header from "./Header";
 import Footer from "./Footer";
 import { useState } from "react";
@@ -16,8 +16,20 @@ function App() {
             // Call create note function from main.mo
             // Pulling title and content that is created in CreateArea.jsx SetNote
             dKeeper.createNote(newNote.title, newNote.content)
-            return [...prevItems, newNote]
+            return [newNote, ...prevItems] // Flipping to have '...prevItems' as the first argument will put the note last (however it will move to first on refresh)
         });
+    }
+
+    // Trigger the following each time the page re-renders
+    useEffect(() => {
+        // Run fetchData() to pull in notes
+        fetchData();
+    }, []); // Add in array to ensure this only triggers a single time when the site reloads
+
+    // Create function to pull data from Motoko backend
+    async function fetchData() {
+        const notesArray = await dKeeper.readNotes();
+        setNote(notesArray);
     }
 
     function deleteNote(id) {
