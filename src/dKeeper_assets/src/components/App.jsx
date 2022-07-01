@@ -6,6 +6,10 @@ import CreateArea from "./CreateArea";
 import Note from "./Note.jsx"
 import { dKeeper } from "../../../declarations/dKeeper";
 
+// In order to run this app do the following:
+// In first terminal tab: dfx start
+// In another terminal tab: npm start
+// When updates are made to app: dfx deploy
 
 function App() {
 
@@ -33,6 +37,10 @@ function App() {
     }
 
     function deleteNote(id) {
+        // Delete data from the backend
+        dKeeper.removeNote(id);
+
+        // Delete the item from the list with the id entered as a param
         setNote(prevItems => {
             return prevItems.filter(
                 (noteItem, index) => {
